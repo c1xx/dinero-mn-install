@@ -59,15 +59,14 @@ echo $STRING6
     sudo ufw default allow outgoing
     sudo ufw allow ssh
     sudo ufw allow 26285/tcp
-    sudo ufw enable -y
+    sudo echo "y" | sudo ufw enable
     fi
 
 
 #Create dinero.conf
 
 sudo mkdir .dinerocore
-echo '
-rpcuser='$password'
+echo 'rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
 listen=1
@@ -77,7 +76,6 @@ maxconnections=256
 masternode=1
 masternodeprivkey='$key'
 externalip='$ip'
-
 ' | sudo -E tee ~/.dinerocore/dinero.conf >/dev/null 2>&1
     sudo chmod 0600 ~/.dinerocore/dinero.conf
 
@@ -97,7 +95,9 @@ sleep 40
     wget https://github.com/dinerocoin/dinero/releases/download/v1.0.1.0/dinerocore-1.0.1.0-linux64.tar.gz
     sudo tar -xzvf dinerocore-1.0.1.0-linux64.tar.gz
     sudo rm dinerocore-1.0.1.0-linux64.tar.gz
-    dinerocore-1.0.1/bin/dinerod -daemon
+	cd dinerocore-1.0.1/bin/
+    cp -f * /usr/local/bin	
+	dinerod -daemon
     clear
  
  sleep 10
@@ -123,7 +123,7 @@ venv/bin/pip install -r requirements.txt
 
 cd
 
-dinerocore-1.0.1/bin/dinerod -daemon
+dinerod -daemon
 
 #Starting coin
     (crontab -l 2>/dev/null; echo '@reboot sleep 30 && cd /root/dinerocore-1.0.1/bin/dinerod -daemon -shrinkdebugfile') | crontab
@@ -159,4 +159,4 @@ cd
  echo $STRING4    
 
 read -p "(this message will remain for at least 120 seconds) Then press any key to continue... " -n1 -s
-dinerocore-1.0.1/bin/dinero-cli getinfo
+dinero-cli getinfo
