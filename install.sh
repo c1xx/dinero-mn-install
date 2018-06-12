@@ -92,9 +92,9 @@ sleep 40
 
 
 #Install Dinero Daemon
-    wget https://github.com/dinerocoin/dinero/releases/download/v1.0.1.0/dinerocore-1.0.1.0-linux64.tar.gz
-    sudo tar -xzvf dinerocore-1.0.1.0-linux64.tar.gz
-    sudo rm dinerocore-1.0.1.0-linux64.tar.gz
+    wget https://github.com/dinerocoin/dinero/releases/download/v1.0.1.1/dinerocore-1.0.1.1-linux64.tar.gz
+    sudo tar -xzvf dinerocore-1.0.1.1-linux64.tar.gz
+    sudo rm dinerocore-1.0.1.1-linux64.tar.gz
 	cd dinerocore-1.0.1/bin/
     cp -f * /usr/local/bin	
 	dinerod -daemon
